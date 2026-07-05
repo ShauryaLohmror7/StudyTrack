@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/* ————————————————————————————————————————————————
+   Aura design tokens — the single source of truth.
+   Day: warm cream paper, near-black ink, aura hues.
+   Night: deep warm brown-black paper, aura glows brighter.
+   ———————————————————————————————————————————————— */
+
+:root {
+  --paper: #f2ede4;
+  --paper-raised: #f7f3ec;
+  --paper-sunken: #eae3d6;
+  --ink: #1a1712;
+  --ink-soft: rgba(26, 23, 18, 0.62);
+  --ink-faint: rgba(26, 23, 18, 0.38);
+  --line: rgba(26, 23, 18, 0.14);
+  --line-strong: rgba(26, 23, 18, 0.32);
+
+  --aura-pink: #e9a0c4;
+  --aura-coral: #f19e8e;
+  --aura-orange: #f4a94c;
+  --aura-peach: #f6d2a9;
+  --sage: #7fa99b;
+  --sage-deep: #5f8b7c;
+
+  --aura-opacity: 0.85;
+  --grain-opacity: 0.05;
+
+  --shadow-soft: 0 2px 24px rgba(26, 23, 18, 0.07);
+
+  color-scheme: light;
+}
+
+[data-theme="night"] {
+  --paper: #191410;
+  --paper-raised: #211a15;
+  --paper-sunken: #120e0b;
+  --ink: #f0e8da;
+  --ink-soft: rgba(240, 232, 218, 0.64);
+  --ink-faint: rgba(240, 232, 218, 0.4);
+  --line: rgba(240, 232, 218, 0.16);
+  --line-strong: rgba(240, 232, 218, 0.36);
+
+  --aura-pink: #ef8fbe;
+  --aura-coral: #f68f7b;
+  --aura-orange: #ffb254;
+  --aura-peach: #f2c896;
+  --sage: #8db9aa;
+  --sage-deep: #a5cfc0;
+
+  --aura-opacity: 0.6;
+  --grain-opacity: 0.07;
+
+  --shadow-soft: 0 2px 24px rgba(0, 0, 0, 0.35);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-paper-sunken: var(--paper-sunken);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-aura-pink: var(--aura-pink);
+  --color-aura-coral: var(--aura-coral);
+  --color-aura-orange: var(--aura-orange);
+  --color-aura-peach: var(--aura-peach);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+
+  --font-display: var(--font-fraunces), "Fraunces", Georgia, serif;
+  --font-sans: var(--font-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, monospace;
+
+  --shadow-soft: var(--shadow-soft);
+}
+
+/* ——— base ——— */
+
+html {
+  background: var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01" on;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--aura-peach);
+  color: #1a1712;
+}
+
+:focus-visible {
+  outline: 2px solid var(--sage-deep);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ——— typographic utilities ——— */
+
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144, "SOFT" 60, "WONK" 0;
+}
+
+/* Outlined serif digits — transparent fill, ink stroke (the reference look) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+  paint-order: stroke fill;
+}
+
+.text-outline-thin {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink);
+}
+
+/* Vertical serif side-label, e.g. "aura timer" */
+.vertical-label {
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 0.14em;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Small technical caps label — the sans voice of the app */
+.microlabel {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ——— atmosphere ——— */
+
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* hairline ruled divider, editorial */
+.rule {
+  border-top: 1px solid var(--line);
+}
+
+/* ——— motion safety ——— */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
