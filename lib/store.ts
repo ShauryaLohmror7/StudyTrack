@@ -85,6 +85,7 @@ interface AuraState {
   updateSubject: (id: string, patch: Partial<Subject>) => void;
   deleteSubject: (id: string) => void;
   addCustomAspect: (subjectId: string, label: string) => void;
+  deleteCustomAspect: (subjectId: string, aspectId: string) => void;
   setWeekStatus: (subjectId: string, week: number, category: Category | CustomSessionCategory, status: Status) => void;
   cycleWeekStatus: (subjectId: string, week: number, category: Category | CustomSessionCategory) => void;
   setWeekNote: (subjectId: string, week: number, note: string) => void;
@@ -258,6 +259,30 @@ export const useAura = create<AuraState>()(
                 custom: { ...(w.custom ?? {}), [id]: "todo" as const },
               })),
             })),
+          };
+        }),
+
+      deleteCustomAspect: (subjectId, aspectId) =>
+        set((s) => {
+          const category: CustomSessionCategory = `custom:${aspectId}`;
+          return {
+            subjects: updateSubjectIn(s.subjects, subjectId, (subj) => ({
+              ...subj,
+              customAspects: (subj.customAspects ?? []).filter((aspect) => aspect.id !== aspectId),
+              weeks: subj.weeks.map((w) => {
+                const { [aspectId]: _removed, ...custom } = w.custom ?? {};
+                return { ...w, custom };
+              }),
+            })),
+            sessions: s.sessions.map((session) =>
+              session.subjectId === subjectId && session.category === category
+                ? { ...session, category: "general" as const }
+                : session
+            ),
+            timer:
+              s.timer.subjectId === subjectId && s.timer.category === category
+                ? { ...s.timer, category: null, weekRef: null }
+                : s.timer,
           };
         }),
 
