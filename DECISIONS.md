@@ -14,3 +14,7 @@ Choices made on your behalf while building, per the spec's instruction to be opi
 - **Aura mood is a separate tiny store** (`lib/aura-mood.ts`), so the background bloom never waits on IndexedDB hydration and anything can drive it without importing the whole data store.
 - **Daily logs are rebuilt from sessions** on every session add/delete (keeping any saved reflection/mood), so totals can never disagree with the session list.
 - **Model constant:** `claude-sonnet-5` in `lib/ai.ts` — swappable in one place.
+- **Per-subject cool auroras** (user request): the timer/home keep the warm reference palette; each subject page overrides the background with its own cool moving aurora (lagoon/polar/meadow/orchid/glacier in `lib/aura-palettes.ts`), editable in the subject form. Break state always cools to sage.
+- **21st.dev "Etheral Shadow"** integrated as an extra background wash (credited in the file). Re-themed to aura tokens, `framer-motion` swapped for `motion`, and the remote Framer mask/noise PNGs replaced with an inline SVG blob mask so the app stays fully offline-capable.
+- **`@theme inline` gotcha:** Tailwind v4's inline theme does not emit runtime CSS variables, so handwritten classes reference the `next/font` variables (`--font-fraunces` etc.) directly instead of the theme aliases.
+- **`?theme=night` URL override** for the pre-paint theme script — useful for testing and sharing night-mode links.

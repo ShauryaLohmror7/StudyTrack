@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 };
 
 // Applies the persisted theme before first paint to avoid a flash.
-const themeScript = `try{var t=localStorage.getItem("aura-theme");if(t==="night")document.documentElement.setAttribute("data-theme","night")}catch(e){}`;
+const themeScript = `try{var q=new URLSearchParams(location.search).get("theme");var t=q||localStorage.getItem("aura-theme");if(t==="night")document.documentElement.setAttribute("data-theme","night")}catch(e){}`;
 
 export default function RootLayout({
   children,
