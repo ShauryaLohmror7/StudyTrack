@@ -32,11 +32,16 @@ export interface FocusTopic {
 
 export type AuraHue = "pink" | "coral" | "orange" | "peach" | "sage";
 
+/** Cool aurora palette names available to subjects (defined in aura-palettes.ts). */
+export type SubjectAurora = "lagoon" | "polar" | "meadow" | "orchid" | "glacier";
+
 export interface Subject {
   id: string;
   name: string;
   code: string;
   color: AuraHue;
+  /** The cool moving aurora shown behind this subject's page. */
+  aurora: SubjectAurora;
   kind: SubjectKind;
   professor?: string;
   totalWeeks: number;
