@@ -14,7 +14,11 @@
       "Bash(ps -p 7449 -o pid,command)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-501/-Users-shaur-StudyTrack/6ba0973b-2a4e-478f-a96a-d25e59ecc0a0/scratchpad/timer.png --window-size=1440,900 --virtual-time-budget=8000 http://localhost:3111)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-501/-Users-shaur-StudyTrack/6ba0973b-2a4e-478f-a96a-d25e59ecc0a0/scratchpad/timer2.png --window-size=1440,900 --virtual-time-budget=8000 http://localhost:3111)",
-      "Bash(git commit -q -m 'feat: Aura Timer — outlined serif clock, presets, focus/break cycle, quotes *)"
+      "Bash(git commit -q -m 'feat: Aura Timer — outlined serif clock, presets, focus/break cycle, quotes *)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-501/-Users-shaur-StudyTrack/6ba0973b-2a4e-478f-a96a-d25e59ecc0a0/scratchpad/home.png --window-size=1440,1600 --virtual-time-budget=9000 http://localhost:3111)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-501/-Users-shaur-StudyTrack/6ba0973b-2a4e-478f-a96a-d25e59ecc0a0/scratchpad/subject.png --window-size=1440,1400 --virtual-time-budget=9000 http://localhost:3111/subjects/seed-fpv)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-501/-Users-shaur-StudyTrack/6ba0973b-2a4e-478f-a96a-d25e59ecc0a0/scratchpad/home2.png --window-size=1440,1600 --virtual-time-budget=9000 http://localhost:3111)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --screenshot=/private/tmp/claude-501/-Users-shaur-StudyTrack/6ba0973b-2a4e-478f-a96a-d25e59ecc0a0/scratchpad/subject2.png --window-size=1440,1400 --virtual-time-budget=9000 http://localhost:3111/subjects/seed-fpv)"
     ]
   }
 }
