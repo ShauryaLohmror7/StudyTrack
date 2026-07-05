@@ -6,6 +6,7 @@ import { useAura } from "@/lib/store";
 import { useAuraMood } from "@/lib/aura-mood";
 import { rollQuote } from "@/lib/quotes";
 import { TimerDigits } from "./TimerDigits";
+import { TimerPiP, type TimerPiPHandle } from "./TimerPiP";
 import { PillButton } from "@/components/ui/PillButton";
 import { AURA_HUE_VAR, type SessionCategory } from "@/lib/types";
 
@@ -44,6 +45,7 @@ export function AuraTimer() {
   const [quote, setQuote] = useState<string | null>(null);
   const [customOpen, setCustomOpen] = useState(false);
   const lastCompleted = useRef(timer.completedFocusCount);
+  const pipRef = useRef<TimerPiPHandle>(null);
 
   const running = timer.endsAt != null;
   const paused = timer.pausedRemainingMs != null;
@@ -114,6 +116,10 @@ export function AuraTimer() {
   const canStart = timer.subjectId != null;
   const weeklyCategory =
     timer.category === "lecture" || timer.category === "homework" || timer.category === "tutorial";
+  const beginFocus = () => {
+    startFocus();
+    void pipRef.current?.open();
+  };
 
   return (
     <section aria-label="Aura timer" className="relative">
@@ -191,6 +197,9 @@ export function AuraTimer() {
           ) : (
             <p className="microlabel">pick a subject to begin</p>
           )}
+        </div>
+        <div className="mt-3 flex justify-center">
+          <TimerPiP ref={pipRef} />
         </div>
 
         {/* ——— idle: configuration ——— */}
@@ -353,7 +362,7 @@ export function AuraTimer() {
               </AnimatePresence>
 
               <div className="mt-1 flex items-center gap-4">
-                <PillButton tone="solid" size="lg" disabled={!canStart} onClick={startFocus}
+                <PillButton tone="solid" size="lg" disabled={!canStart} onClick={beginFocus}
                   style={!canStart ? { opacity: 0.35, cursor: "not-allowed" } : undefined}
                 >
                   Begin focus
