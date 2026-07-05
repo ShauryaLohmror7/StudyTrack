@@ -279,10 +279,33 @@ export function SubjectDetail({ id }: { id: string }) {
           <SectionHeading
             kicker="week by week"
             right={
-              <span className="font-mono text-xs" style={{ color: "var(--ink-soft)" }}>
-                {(["lecture", "homework", "tutorial"] as const)
-                  .map((t) => `${t[0]!.toUpperCase()} ${trackProgress(subject, t).done}/${subject.totalWeeks}`)
-                  .join(" · ")}
+              <span className="flex items-center gap-4">
+                <span className="font-mono text-xs" style={{ color: "var(--ink-soft)" }}>
+                  {(["lecture", "homework", "tutorial"] as const)
+                    .map((t) => `${t[0]!.toUpperCase()} ${trackProgress(subject, t).done}/${subject.totalWeeks}`)
+                    .join(" · ")}
+                </span>
+                <span className="flex items-center gap-1.5" aria-label="Number of weeks">
+                  <button
+                    onClick={() => updateSubject(subject.id, { totalWeeks: Math.max(1, subject.totalWeeks - 1) })}
+                    aria-label="One week fewer"
+                    className="h-6 w-6 rounded-full font-mono text-xs transition-transform hover:scale-110"
+                    style={{ border: "1px solid var(--line-strong)" }}
+                  >
+                    −
+                  </button>
+                  <span className="font-mono text-xs tabular" style={{ minWidth: "3.5rem", textAlign: "center" }}>
+                    {subject.totalWeeks} wks
+                  </span>
+                  <button
+                    onClick={() => updateSubject(subject.id, { totalWeeks: Math.min(30, subject.totalWeeks + 1) })}
+                    aria-label="One week more"
+                    className="h-6 w-6 rounded-full font-mono text-xs transition-transform hover:scale-110"
+                    style={{ border: "1px solid var(--line-strong)" }}
+                  >
+                    +
+                  </button>
+                </span>
               </span>
             }
           >
