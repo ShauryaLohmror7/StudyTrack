@@ -63,7 +63,14 @@ export async function POST(request: Request) {
             parts: [{ text: `Today's study summary:\n${JSON.stringify(body, null, 2)}` }],
           },
         ],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 800 },
+        generationConfig: {
+          temperature: 0.7,
+          // Gemini 2.5 Flash "thinks" by default and that reasoning eats the
+          // output budget, truncating the reply mid-sentence — turn it off.
+          // No length cap: let the reflection run as long as it wants (the
+          // prompt already keeps it around 220 words).
+          thinkingConfig: { thinkingBudget: 0 },
+        },
       }),
     });
 
